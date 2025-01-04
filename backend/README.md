@@ -91,10 +91,6 @@ $ docker-compose up -d
 └── requirements.txt    // file chứa các thư viện để cài đặt qua pip install
 ```
 
-## Demo URL
-
-[FASTAPI-BASE](http://fastapi-base.longblog.site/docs)
-
 ## Migration
 
 Migration là một tính năng cho phép bạn thay đổi cả cấu trúc và dữ liệu trong database.
