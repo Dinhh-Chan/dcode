@@ -52,8 +52,8 @@ $ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 - Run docker-compose
 
 ```
-$ git clone https://github.com/Longdh57/fastapi-base
-$ cd fastapi-base
+
+$ cd backend
 $ DOCKER_BUILDKIT=1 docker build -t fastapi-base:latest .
 $ docker-compose up -d
 ```
