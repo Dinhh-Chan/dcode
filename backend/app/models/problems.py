@@ -14,3 +14,12 @@ class problems(Base):
     nguoi_tao_id = Column(Integer, ForeignKey("users.id"),nullable= True)
     ngay_tao = Column(datetime )
     ngay_cap_nhat = Column(datetime, server_default= func.now(), onupdate= func.now())
+    
+    difficulty = relationship("difficulties", back_populates="problems")
+    topic = relationship("topics", back_populates="problems")
+    creator = relationship("users", back_populates="created_problems")
+    problem_languages = relationship("problem_languages", back_populates="problem")
+    contest_problems = relationship("contest_problems", back_populates="problem")
+    submissions = relationship("submissions", back_populates="problem")
+    testcases = relationship("testcases", back_populates="problem")
+    discussions = relationship("discussions", back_populates="problem")

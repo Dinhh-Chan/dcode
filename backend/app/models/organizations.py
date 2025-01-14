@@ -9,3 +9,5 @@ class orginations(Base):
     mo_ta = Column(Text)
     ngay_tao = Column(Date) 
     
+    users = relationship("Users", back_populates="organization")
+    contests = relationship("Contests", back_populates="organization")

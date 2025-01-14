@@ -18,3 +18,7 @@ class submissions(Base):
     contest_id = Column(Integer, ForeignKey("contests.id"))
     diem= Column(Integer, default=0)
     
+    user = relationship("users", back_populates="submissions")
+    problem = relationship("problems", back_populates="submissions")
+    language = relationship("languages", back_populates="submissions")
+    contest = relationship("contests")

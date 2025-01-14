@@ -11,3 +11,5 @@ class testcases(Base):
     output_data = Column(String, nullable= False)
     time_limit = Column(Float)    
     memory_limit = Column(Integer)
+    
+    problem = relationship("problems", back_populates="testcases")

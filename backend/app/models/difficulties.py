@@ -7,3 +7,4 @@ class difficulties(Base):
     id = Column(Integer, primary_key= True, index= True)
     do_kho = Column(Enum(DiffycultyEnum), default= DiffycultyEnum.Easy)
     
+    problems = relationship("Problems", back_populates="difficulty")

@@ -10,3 +10,6 @@ class contest_participants(Base):
     diem = Column(Integer, default= 0)
     thoi_gian_tha_gia = Column(datetime, server_default= func.now())
     __table_args__= (PrimaryKeyConstraint("contest_id", "user_id"))
+    
+    contest = relationship("contests", back_populates="contest_participants")
+    user = relationship("users", back_populates="contest_participants")
