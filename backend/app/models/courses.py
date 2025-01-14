@@ -2,7 +2,8 @@ from sqlalchemy import Integer, String , Column , ForeignKey
 from . import Base 
 import datetime 
 from sqlalchemy.sql import func 
-class coures(Base):
+class courses(Base):
+    __tablename__= "courses"
     id = Column(Integer,primary_key= True, index=True)
     ten_khoa_hoc = Column(String(255), nullable= False)
     mo_ta = Column(String)
