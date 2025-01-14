@@ -1,8 +1,8 @@
 import enum 
 class GenderEnum(enum.Enum):
-    male= "male"
-    female ="female"
-    other= "other"
+    male= "Nữ"
+    female ="Nam"
+    other= "Khác"
 class RoleEnum(enum.Enum):
     user="user"
     admin="admin"
