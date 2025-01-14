@@ -1,5 +1,5 @@
 from sqlalchemy import Integer, String , Column , Enum
-from sqlalchemy import relationship 
+from sqlalchemy.orm import relationship 
 from . import Base 
 from emun import DiffycultyEnum 
 class difficulties(Base):

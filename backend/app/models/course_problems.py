@@ -1,5 +1,5 @@
 from sqlalchemy import Integer, String, ForeignKey, PrimaryKeyConstraint , Column 
-from sqlalchemy import relationship 
+from sqlalchemy.orm import relationship 
 from . import Base 
 class course_problems(Base):
     __tablename__= "course_problems"

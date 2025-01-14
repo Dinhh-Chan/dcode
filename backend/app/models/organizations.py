@@ -1,5 +1,5 @@
 from sqlalchemy import Integer, String, Column, Text 
-from sqlalchemy import relationship
+from sqlalchemy.orm import relationship
 from datetime import Date
 from . import Base  
 class orginations(Base):

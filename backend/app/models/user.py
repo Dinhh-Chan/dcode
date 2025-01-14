@@ -1,5 +1,5 @@
 from sqlalchemy import Integer, String, Enum , Table , Column , Text, ForeignKey 
-from sqlalchemy import relationship 
+from sqlalchemy.orm import relationship 
 from sqlalchemy import func 
 from . emun import GenderEnum, RoleEnum 
 from . import Base 
