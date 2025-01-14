@@ -7,5 +7,5 @@ class orginations(Base):
     id =Column(Integer, primary_key= True , index= True )
     ten_to_chuc = Column(String(255), nullable= False )
     mo_ta = Column(Text)
-    ngay_tao = Date 
+    ngay_tao = Column(Date) 
     
