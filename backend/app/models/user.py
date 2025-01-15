@@ -1,10 +1,9 @@
-from sqlalchemy import Integer, String, Enum , Table , Column , Text, ForeignKey 
+from sqlalchemy import Integer, String, Enum , Table , Column , Text, ForeignKey , Date, DateTime
 from sqlalchemy.orm import relationship 
 from sqlalchemy import func 
 from . emun import GenderEnum, RoleEnum 
 from . import Base 
 import datetime
-from datetime import Date 
 class users(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index= True)

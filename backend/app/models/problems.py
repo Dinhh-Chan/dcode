@@ -1,7 +1,6 @@
-from sqlalchemy import Integer, String, Column , ForeignKey 
+from sqlalchemy import Integer, String, Column , ForeignKey ,DateTime
 from sqlalchemy.orm import relationship 
 from . import Base 
-from datetime import Date 
 import datetime
 from sqlalchemy.sql import func 
 class problems(Base):
@@ -12,8 +11,8 @@ class problems(Base):
     difficulty_id = Column(Integer, ForeignKey("difficulties,id"), nullable= False)
     topic_id = Column(Integer, ForeignKey("topics.id"), nullable= True)
     nguoi_tao_id = Column(Integer, ForeignKey("users.id"),nullable= True)
-    ngay_tao = Column(datetime )
-    ngay_cap_nhat = Column(datetime, server_default= func.now(), onupdate= func.now())
+    ngay_tao = Column(DateTime )
+    ngay_cap_nhat = Column(DateTime, server_default= func.now(), onupdate= func.now())
     
     difficulty = relationship("difficulties", back_populates="problems")
     topic = relationship("topics", back_populates="problems")

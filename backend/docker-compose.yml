@@ -1,39 +1,21 @@
-version: '3.7'
-
 services:
   db:
-    image: postgres:13.2
+    image: postgres:15
+    environment:
+      POSTGRES_DB: data_code
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5438:5432"
     volumes:
-      - ./docker/db:/var/lib/postgresql/data
-      - ./postgresql.conf:/etc/postgresql/postgresql.conf
-    expose:
-      - 5432
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5433:5432"
-    restart: unless-stopped
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - dcode
 
-  alembic:
-    image: fastapi-base:latest
-    environment:
-      SQL_DATABASE_URL: 'postgresql+psycopg2://postgres:postgres@db:5432/postgres'
-      SECRET_KEY: ${SECRET_KEY}
-    command: [ "alembic", "upgrade", "head" ]
-    depends_on:
-      - db
+networks:
+  dcode:
+    driver: bridge
 
-  app:
-    image: fastapi-base:latest
-    environment:
-      PROJECT_NAME: ${PROJECT_NAME}
-      SQL_DATABASE_URL: 'postgresql+psycopg2://postgres:postgres@db:5432/postgres'
-      SECRET_KEY: ${SECRET_KEY}
-    ports:
-      - "8000:8000"
-    restart: unless-stopped
-    depends_on:
-      - db
-      - alembic
+volumes:
+  db_data:
+  superset_home:
