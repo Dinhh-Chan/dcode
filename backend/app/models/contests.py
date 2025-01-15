@@ -14,7 +14,7 @@ class contests(Base):
     organization_id = Column(Integer, ForeignKey("organizations.id"), nullable=True)
     ngay_tao = Column(DateTime, server_default=func.now())
     
-    creator = relationship("Users", back_populates="created_contests")
-    organization = relationship("Organizations", back_populates="contests")
-    contest_problems = relationship("ContestProblems", back_populates="contest")
-    contest_participants = relationship("ContestParticipants", back_populates="contest")
+    creator = relationship("users", back_populates="created_contests")
+    organization = relationship("organizations", back_populates="contests")
+    contest_problems = relationship("contest_problems", back_populates="contest")
+    contest_participants = relationship("contest_participants", back_populates="contest")

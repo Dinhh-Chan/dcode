@@ -19,3 +19,4 @@ from .testcases import testcases
 from .topics import topics 
 from .user_courses import user_courses 
 from .emun import enum , GenderEnum, RoleEnum , DiffycultyEnum , SubmissionStatusEnum 
+from .courses import courses

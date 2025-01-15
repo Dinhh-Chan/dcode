@@ -10,7 +10,7 @@ class submissions(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable= False)
     problem_id = Column(Integer, ForeignKey("problems.id"), nullable= False)
     code = Column(String, nullable= False)
-    language_id = Column(Integer,ForeignKey("lanugages.id"), nullable= False)
+    language_id = Column(Integer,ForeignKey("languages.id"), nullable= False)
     status = Column(Enum(SubmissionStatusEnum), default=SubmissionStatusEnum.Pending)
     thoi_gian_nop = Column(DateTime, server_default= func.now())
     thoi_gian_thuc_hien = Column(Float )

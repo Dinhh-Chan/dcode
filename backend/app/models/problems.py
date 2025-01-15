@@ -8,7 +8,7 @@ class problems(Base):
     id = Column(Integer, primary_key= True , index= True )
     tieu_de = Column(String(255), nullable= False)
     mo_ta = Column(String, nullable= False)
-    difficulty_id = Column(Integer, ForeignKey("difficulties,id"), nullable= False)
+    difficulty_id = Column(Integer, ForeignKey("difficulties.id"), nullable= False)
     topic_id = Column(Integer, ForeignKey("topics.id"), nullable= True)
     nguoi_tao_id = Column(Integer, ForeignKey("users.id"),nullable= True)
     ngay_tao = Column(DateTime )
