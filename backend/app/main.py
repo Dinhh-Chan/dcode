@@ -4,7 +4,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi_sqlalchemy import DBSessionMiddleware
 from starlette.middleware.cors import CORSMiddleware
-
+from database import SessionLocal 
 from app.api.api_router import router
 from app.models import Base
 from app.db.base import engine
@@ -41,6 +41,13 @@ def get_application() -> FastAPI:
 
     return application
 
+
+def get_db():
+    db = SessionLocal()
+    try :
+        yield db 
+    finally :
+        db.close()
 
 app = get_application()
 if __name__ == '__main__':

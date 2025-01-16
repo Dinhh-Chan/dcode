@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, String, Enum , Table , Column , Text, ForeignKey , Date, DateTime
+from sqlalchemy import Integer, email, String, Enum , Table , Column , Text, ForeignKey , Date, DateTime
 from sqlalchemy.orm import relationship 
 from sqlalchemy import func 
 from . emun import GenderEnum, RoleEnum 
@@ -13,6 +13,7 @@ class users(Base):
     tieu_su = Column(Text, nullable=True)
     username = Column(String(100), unique=True, nullable= False )
     password= Column(String(255), nullable= False)
+    email = Column(email)
     diem= Column(Integer, default= 0  )
     role= Column(Enum(RoleEnum), default=RoleEnum.user)
     organization_id = Column(Integer, ForeignKey("organizations.id"), nullable=True)
