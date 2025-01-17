@@ -11,7 +11,7 @@ SENDER_PASSWORD ="kgow obrd xtwn mgnp"
 
 def send_email_code(reciptien_email: str, code: str):
     """Mã xác thực đến người dùng """
-    subject = "Xác thực đăng ký"
+    subject = "Mã xác thực"
     body = f"Xin chào, chúng tôi nhận được yêu cầu đăng ký từ bạn, nếu người đăng ký không phải là bạn, hãy bỏ qua email này
     Mã xác thực của bạn là: {code} 
     "

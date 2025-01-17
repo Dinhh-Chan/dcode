@@ -1,6 +1,6 @@
 FROM python:3.8.6
 
-WORKDIR /app
+WORKDIR /backend
 
 COPY requirements.txt .
 
@@ -12,8 +12,8 @@ RUN groupadd -g 1000 app_group
 
 RUN useradd -g app_group --uid 1000 app_user
 
-RUN chown -R app_user:app_group /app
+RUN chown -R app_user:app_group /backend
 
 USER app_user
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

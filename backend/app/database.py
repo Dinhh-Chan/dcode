@@ -1,6 +1,6 @@
 # backend/app/database.py
 
-from models.model_base import Base 
+from .models.model_base import Base 
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
