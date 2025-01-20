@@ -5,10 +5,11 @@ from starlette.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from app.models import Base
+from app.api import login_register 
 from app.core.config import settings
 from app.helpers.exception_handler import CustomException, http_exception_handler
 from .database import SessionLocal  # Sử dụng SessionLocal từ cơ sở dữ liệu của bạn.
-
+from app.api.login_register import router
 logging.config.fileConfig(settings.LOGGING_CONFIG_FILE, disable_existing_loggers=False)
 
 engine = create_engine(settings.DATABASE_URL, echo=True)
@@ -37,7 +38,7 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
     application.add_exception_handler(CustomException, http_exception_handler)
-
+    application.include_router(login_register.router, tags=["Login/Register"])
     return application
 
 # Session creator for database interaction

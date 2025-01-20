@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func 
 from . import Base 
 import datetime 
-class discussions(Base):
+class Discussions(Base):
     __tablename__ = "discussions"
     id = Column(Integer, primary_key= True, index= True)
     problem_id = Column(Integer, ForeignKey("problems.id"), nullable= False)
@@ -12,6 +12,6 @@ class discussions(Base):
     noi_dung= Column(String, nullable= False)
     ngay_tao= Column(DateTime, server_default= func.now())
     
-    problem = relationship("problems", back_populates="discussions")
-    user = relationship("users", back_populates="discussions")
-    comments = relationship("comments", back_populates="discussion")
+    problem = relationship("Problems", back_populates="discussions")
+    user = relationship("Users", back_populates="discussions")
+    comments = relationship("Comments", back_populates="discussion")

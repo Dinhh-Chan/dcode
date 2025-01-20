@@ -3,7 +3,8 @@ class UserBase(BaseModel):
     ho_va_ten: str 
     username: str 
     email : str 
-class UserLogin(UserBase):
+class UserLogin(BaseModel):
+    username: str
     password: str 
 class UserCreate(UserBase):
     password: str 

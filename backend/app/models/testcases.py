@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from . import Base 
 import datetime
 from sqlalchemy.sql import func 
-class testcases(Base):
+class Testcases(Base):
     __tablename__ = "testcases"
     id = Column(Integer, primary_key= True, index= True)
     problem_id = Column(Integer, ForeignKey("problems.id"), nullable= False)
@@ -12,4 +12,4 @@ class testcases(Base):
     time_limit = Column(Float)    
     memory_limit = Column(Integer)
     
-    problem = relationship("problems", back_populates="testcases")
+    problem = relationship("Problems", back_populates="testcases")

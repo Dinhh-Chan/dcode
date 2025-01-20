@@ -1,10 +1,10 @@
 from sqlalchemy import Integer,  String, Enum , Table , Column , Text, ForeignKey , Date, DateTime
 from sqlalchemy.orm import relationship 
 from sqlalchemy import func 
-from . emun import GenderEnum, RoleEnum 
+from .enums import GenderEnum, RoleEnum 
 from . import Base 
 import datetime
-class users(Base):
+class Users(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index= True)
     ho_va_ten = Column(String(255),nullable= False)
