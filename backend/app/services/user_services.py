@@ -103,28 +103,37 @@ def login_by_email_service(user: UserLoginByEmail, db: Session):
 # Chỉnh sửa thông tin người dùng 
 def update_user(user: UserUpdate , db: Session, user_name : str): 
     db_user = db.query(Users).filter(Users.username == user_name).first()
-    if not db_user :
-        return {"error": "user not found"}
-    if db_user :
-        if user.ho_va_ten :
-            db_user.ho_va_ten = user.ho_va_ten 
-        if user.password :
-            db_user.password = user.password 
-        if user.ngay_sinh :
-            db_user.ngay_sinh = user.ngay_sinh 
-        if user.tieu_su :
-            db_user.tieu_su = user.tieu_su 
-        if user.gioi_tinh :
-            db_user.gioi_tinh = user.gioi_tinh 
-        db.commit()
-        db.refresh(db_user)
-        return db_user 
-    return None 
+    if not db_user:
+        return {"error": "Người dùng không tồn tại"}
+
+    if user.ho_va_ten:
+        db_user.ho_va_ten = user.ho_va_ten
+    if user.gioi_tinh:
+        db_user.gioi_tinh = user.gioi_tinh
+    if user.email:
+        db_user.email = user.email
+    if user.username:
+        db_user.username = user.username
+    if user.password:
+        db_user.password = get_password_hash(user.password)
+    if user.tieu_su:
+        db_user.tieu_su = user.tieu_su
+    if user.ngay_sinh:
+        db_user.ngay_sinh = user.ngay_sinh
+    if user.diem is not None:
+        db_user.diem = user.diem
+    if user.role:
+        db_user.role = user.role
+    
+    db.commit()
+    db.refresh(db_user)
+    return db_user
 # Delete user 
 def delete_user(db: Session , user_name: str  ):
     db_user = db.query(Users).filter(Users.username == user_name)
-    if db_user :
-        db.delete(db_user)
-        db.commit()
-        db.refresh()
-    return {"error":"user not found"}
+    if not db_user:
+        return {"error": "Người dùng không tồn tại"}
+
+    db.delete(db_user)
+    db.commit()
+    return db_user

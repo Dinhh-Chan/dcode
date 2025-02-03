@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from app.db.db import get_db
-from app.schemas.users import UserLogin, UserOut, EmailVerification, UserCreate, UserLoginByEmail
-from app.services.user_services import register_user_service, verify_email_service, login_user_service, send_verification_code_service, login_by_email_service
+from app.schemas.users import UserLogin, UserOut, EmailVerification, UserCreate, UserLoginByEmail, UserUpdate 
+from app.services.user_services import register_user_service, verify_email_service, login_user_service, send_verification_code_service, login_by_email_service, update_user, delete_user
 
 router = APIRouter()
 
@@ -45,3 +45,17 @@ def login_by_email(user: UserLoginByEmail, db: Session = Depends(get_db)):
     if "error" in result:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=result["error"])
     return {"message": "Đăng nhập thành công"}
+
+
+@router.put("/update/{username}", response_model= UserOut)
+def update_user(username: str, user: UserUpdate, db: Session= Depends(get_db)):
+    user_update = update_user(user, db, username)
+    if "error" in user_update:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=user_update["error"])
+    return user_update 
+@router.delete("/delete/{username}", response_model= UserOut) 
+def delete_user(username: str, db: Session= Depends(get_db)):
+    res = delete_user(db, username)
+    if "error" in res :
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=res["error"])
+    return res
