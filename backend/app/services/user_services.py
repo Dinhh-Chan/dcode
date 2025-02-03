@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from app.models.user import Users
 from app.core.security import verify_password, create_access_token, get_password_hash
 from app.core.email import send_email_code, generate_code
-from app.schemas.users import UserCreate, UserLogin, EmailVerification, UserLoginByEmail
+from app.schemas.users import UserUpdate, UserCreate, UserLogin, EmailVerification, UserLoginByEmail
 from datetime import datetime
 
 # Đăng ký người dùng
@@ -100,3 +100,31 @@ def login_by_email_service(user: UserLoginByEmail, db: Session):
         return {"message": "Đăng nhập thành công"}
     else:
         return {"error": "Mã xác thực không hợp lệ"}
+# Chỉnh sửa thông tin người dùng 
+def update_user(user: UserUpdate , db: Session, user_name : str): 
+    db_user = db.query(Users).filter(Users.username == user_name).first()
+    if not db_user :
+        return {"error": "user not found"}
+    if db_user :
+        if user.ho_va_ten :
+            db_user.ho_va_ten = user.ho_va_ten 
+        if user.password :
+            db_user.password = user.password 
+        if user.ngay_sinh :
+            db_user.ngay_sinh = user.ngay_sinh 
+        if user.tieu_su :
+            db_user.tieu_su = user.tieu_su 
+        if user.gioi_tinh :
+            db_user.gioi_tinh = user.gioi_tinh 
+        db.commit()
+        db.refresh(db_user)
+        return db_user 
+    return None 
+# Delete user 
+def delete_user(db: Session , user_name: str  ):
+    db_user = db.query(Users).filter(Users.username == user_name)
+    if db_user :
+        db.delete(db_user)
+        db.commit()
+        db.refresh()
+    return {"error":"user not found"}
