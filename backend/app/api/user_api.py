@@ -14,7 +14,7 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=result["error"])
     return {"message": "Đăng ký thành công, hãy kiểm tra mã xác thực trong hòm thư email của bạn"}
 
-# Xác thực email
+# Xác thực email 
 @router.post("/verify-email")
 def verify_email(verification: EmailVerification, db: Session = Depends(get_db)):
     result = verify_email_service(verification, db)
@@ -44,7 +44,7 @@ def login_by_email(user: UserLoginByEmail, db: Session = Depends(get_db)):
     result = login_by_email_service(user, db)
     if "error" in result:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=result["error"])
-    return {"message": "Đăng nhập thành công"}
+    return result
 
 
 @router.put("/update/{username}", response_model= UserOut)

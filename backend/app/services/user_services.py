@@ -95,9 +95,10 @@ def login_by_email_service(user: UserLoginByEmail, db: Session):
     
     # Kiểm tra mã xác thực
     if db_user.verification_code == user.verification_code:
+        access_token = create_access_token(user_id=db_user.username) 
         db_user.verification_code = generate_code()
         db.commit()
-        return {"message": "Đăng nhập thành công"}
+        return {"message": "Đăng nhập thành công", "access token": access_token}
     else:
         return {"error": "Mã xác thực không hợp lệ"}
 # Chỉnh sửa thông tin người dùng 
@@ -137,3 +138,9 @@ def delete_user(db: Session , user_name: str  ):
     db.delete(db_user)
     db.commit()
     return db_user
+
+def get_user(db: Session , user_name: str ):
+    db_user = db.query(Users).filter(Users.username == user_name).first()
+    if not db_user :
+        return {"error": "User not found"}
+    return db_user 

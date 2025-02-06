@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = ''  # Giá trị mặc định nếu không có trong .env
     API_PREFIX: str = ''
     BACKEND_CORS_ORIGINS: List[str] = ['*']
-    DATABASE_URL: str = 'postgresql+psycopg2://root:password@192.168.30.91:5447/data_code'  # Giá trị mặc định
+    DATABASE_URL: str = 'postgresql+psycopg2://root:password@172.16.8.127:5447/data_code'  # Giá trị mặc định
     ACCESS_TOKEN_EXPIRE_SECONDS: int = 60 * 60 * 24 * 7  # Token expired after 7 days
     SECURITY_ALGORITHM: str = 'HS256'
     LOGGING_CONFIG_FILE: str = os.path.join(BASE_DIR, 'logging.ini')
