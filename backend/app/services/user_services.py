@@ -142,5 +142,5 @@ def delete_user(db: Session , user_name: str  ):
 def get_user(db: Session , user_name: str ):
     db_user = db.query(Users).filter(Users.username == user_name).first()
     if not db_user :
-        return {"error": "User not found"}
+        return None 
     return db_user 

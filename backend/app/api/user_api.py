@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from app.db.db import get_db
 from app.schemas.users import UserLogin, UserOut, EmailVerification, UserCreate, UserLoginByEmail, UserUpdate 
-from app.services.user_services import register_user_service, verify_email_service, login_user_service, send_verification_code_service, login_by_email_service, update_user, delete_user
+from app.services.user_services import register_user_service, verify_email_service, login_user_service, send_verification_code_service, login_by_email_service, update_user, delete_user,get_user
 
 router = APIRouter()
 
@@ -59,3 +59,9 @@ def delete_user(username: str, db: Session= Depends(get_db)):
     if "error" in res :
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=res["error"])
     return res
+@router.get("/get/{username}", response_model= UserOut)
+def get_user_infor(username: str , db: Session= Depends(get_db)):
+    res= get_user(db, username)
+    if res == None :
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail= "user not found")
+    return res 
