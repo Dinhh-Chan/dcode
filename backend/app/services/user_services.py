@@ -4,7 +4,7 @@ from app.core.security import verify_password, create_access_token, get_password
 from app.core.email import send_email_code, generate_code
 from app.schemas.users import UserUpdate, UserCreate, UserLogin, EmailVerification, UserLoginByEmail
 from datetime import datetime
-
+from sqlalchemy import desc
 # Đăng ký người dùng
 def register_user_service(user: UserCreate, db: Session):
     check_user_email = db.query(Users).filter(Users.email == user.email).first()
@@ -141,6 +141,11 @@ def delete_user(db: Session , user_name: str  ):
 
 def get_user(db: Session , user_name: str ):
     db_user = db.query(Users).filter(Users.username == user_name).first()
+    if not db_user :
+        return None 
+    return db_user 
+def get_user_order_by_diem(db: Session):
+    db_user = db.query(Users).order_by(desc(Users.diem)).all()
     if not db_user :
         return None 
     return db_user 
