@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     SECURITY_ALGORITHM: str = 'HS256'
     LOGGING_CONFIG_FILE: str = os.path.join(BASE_DIR, 'logging.ini')
 
+
     class Config:
         env_file = ".env"  # Đảm bảo rằng tệp .env được đọc từ thư mục hiện tại
 

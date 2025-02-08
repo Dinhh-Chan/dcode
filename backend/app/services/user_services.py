@@ -157,7 +157,7 @@ def get_user_order_by_diem(db: Session):
     return db_user 
 #service update avatar 
 def upload_avatar(username: str , file, db: Session) -> str :
-    db_user = db.query(Users).filter(Users.username == username)
+    db_user = db.query(Users).filter(Users.username == username).first()
     if not db_user :
         raise HTTPException(status_code= status.HTTP_400_BAD_REQUEST, detail= "user not found")
     avatar_filename = f"{username}_{file.filename}"

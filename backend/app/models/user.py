@@ -19,7 +19,7 @@ class Users(Base):
     email_verified = Column(DateTime , nullable= True)
     verification_code = Column(Text, nullable= False )
     organization_id = Column(Integer, ForeignKey("organizations.id"), nullable=True)
-    avatar = Column(String, nullable= True )
+    avatar = Column(Text, nullable= True )
     
     
     organization = relationship("Organizations", back_populates="users")
