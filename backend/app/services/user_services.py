@@ -5,6 +5,12 @@ from app.core.email import send_email_code, generate_code
 from app.schemas.users import UserUpdate, UserCreate, UserLogin, EmailVerification, UserLoginByEmail
 from datetime import datetime
 from sqlalchemy import desc
+from fastapi import HTTPException , status 
+import os 
+import shutil
+AVATAR_UPLOAD_DIR = "static/avatars"
+if not os.path.exists(AVATAR_UPLOAD_DIR):
+    os.makedirs(AVATAR_UPLOAD_DIR, mode= 0o777)
 # Đăng ký người dùng
 def register_user_service(user: UserCreate, db: Session):
     check_user_email = db.query(Users).filter(Users.email == user.email).first()
@@ -149,3 +155,16 @@ def get_user_order_by_diem(db: Session):
     if not db_user :
         return None 
     return db_user 
+#service update avatar 
+def upload_avatar(username: str , file, db: Session) -> str :
+    db_user = db.query(Users).filter(Users.username == username)
+    if not db_user :
+        raise HTTPException(status_code= status.HTTP_400_BAD_REQUEST, detail= "user not found")
+    avatar_filename = f"{username}_{file.filename}"
+    avatar_fath = os.path.join(AVATAR_UPLOAD_DIR, avatar_filename)
+    with open(avatar_fath, "wb") as buffer :
+       shutil.copyfileobj(file.file, buffer )
+    db_user.avatar = avatar_filename 
+    db.commit()
+    return avatar_filename
+ 

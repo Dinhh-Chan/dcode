@@ -1,10 +1,10 @@
 from typing import List
-from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi import APIRouter, HTTPException, Depends, status, File , UploadFile 
 from sqlalchemy.orm import Session
 from app.db.db import get_db
 from app.schemas.users import UserLogin, UserOut, EmailVerification, UserCreate, UserLoginByEmail, UserUpdate 
 from app.services.user_services import register_user_service, verify_email_service, login_user_service, send_verification_code_service, login_by_email_service, update_user, delete_user,get_user, get_user_order_by_diem
-
+from app.services.user_services import upload_avatar
 router = APIRouter()
 
 # Đăng ký người dùng
@@ -74,3 +74,8 @@ def get_rank(db: Session = Depends(get_db)):
     if res == None :
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail= "user not found")
     return res 
+#upload avatar 
+@router.post("/avatar/{username}")
+async def upload_avatar_api(username: str , file: UploadFile= File(...), db: Session= Depends(get_db)):
+    avatar_filename = upload_avatar(username, file , db)
+    return avatar_filename 

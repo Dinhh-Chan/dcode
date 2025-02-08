@@ -11,6 +11,7 @@ class UserBase(BaseModel):
     username: str
     diem: Optional[int] = 0
     role: Optional[RoleEnum] = RoleEnum.user
+    avatar : str = None 
 
 class UserCreate(UserBase):
     password: str

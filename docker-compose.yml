@@ -19,6 +19,7 @@ services:
       - ./backend/.env
     volumes:
       - ./backend:/backend
+      - ./backend/static:/backend/app/static/avatars
     ports:
       - "9992:8000"
     restart: unless-stopped
