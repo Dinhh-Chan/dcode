@@ -5,6 +5,8 @@ from app.db.db import get_db
 from app.schemas.users import UserLogin, UserOut, EmailVerification, UserCreate, UserLoginByEmail, UserUpdate 
 from app.services.user_services import register_user_service, verify_email_service, login_user_service, send_verification_code_service, login_by_email_service, update_user, delete_user,get_user, get_user_order_by_diem
 from app.services.user_services import upload_avatar
+from app.core.security import get_current_user
+from app.models.user import Users
 router = APIRouter()
 
 # Đăng ký người dùng
@@ -48,7 +50,7 @@ def login_by_email(user: UserLoginByEmail, db: Session = Depends(get_db)):
     return result
 # cập nhật thông tin người dùng
 @router.put("/update/{username}", response_model= UserOut)
-def update_user(username: str, user: UserUpdate, db: Session= Depends(get_db)):
+def update_user(username: str, user: UserUpdate, db: Session= Depends(get_db), current_user: Users = Depends(get_current_user)):
     user_update = update_user(user, db, username)
     if "error" in user_update:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=user_update["error"])

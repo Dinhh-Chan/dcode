@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models.user import Users
-from app.core.security import verify_password, create_access_token, get_password_hash
+from app.core.security import verify_password, create_access_token, get_password_hash, get_current_user 
 from app.core.email import send_email_code, generate_code
 from app.schemas.users import UserUpdate, UserCreate, UserLogin, EmailVerification, UserLoginByEmail
 from datetime import datetime

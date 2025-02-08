@@ -8,7 +8,7 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))  # Nạp biến môi trường từ 
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = 'FASTAPI_BASE'  # Giá trị mặc định nếu không có trong .env
-    SECRET_KEY: str = ''  # Giá trị mặc định nếu không có trong .env
+    SECRET_KEY: str = 'thangdatngunhucho'  # Giá trị mặc định nếu không có trong .env
     API_PREFIX: str = ''
     BACKEND_CORS_ORIGINS: List[str] = ['*']
     DATABASE_URL: str = 'postgresql+psycopg2://root:password@172.16.8.127:5447/data_code'  # Giá trị mặc định

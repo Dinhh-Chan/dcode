@@ -32,7 +32,7 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
     application.add_exception_handler(CustomException, http_exception_handler)
-    application.include_router(user_api.router, tags=["USER"],prefix="/user")
+    application.include_router(user_api.router, tags=["USER"])
     return application
 
 # Session creator for database interaction
