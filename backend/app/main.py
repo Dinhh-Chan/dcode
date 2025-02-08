@@ -22,12 +22,6 @@ def get_application() -> FastAPI:
         redoc_url='/re-docs',
         openapi_url=f"{settings.API_PREFIX}/openapi.json",
         description='''
-        Base frame with FastAPI micro framework + Postgresql
-            - Login/Register with JWT
-            - Permission
-            - CRUD User
-            - Unit testing with Pytest
-            - Dockerize
         '''
     )
     application.add_middleware(
@@ -38,7 +32,7 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
     application.add_exception_handler(CustomException, http_exception_handler)
-    application.include_router(user_api.router, tags=["USER"])
+    application.include_router(user_api.router, tags=["USER"],prefix="/user")
     return application
 
 # Session creator for database interaction
